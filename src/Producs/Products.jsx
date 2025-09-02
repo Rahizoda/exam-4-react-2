@@ -93,7 +93,9 @@ const Products = () => {
             products.map((el) => (
               <tr
                 key={el.id}
-                className="p-2 text-center h-[70px] rounded-[5px] w-[100%]"
+                className="p-2 text-center h-[70px] rounded-[5px] w-[100%] 
+             hover:bg-gray-100 dark:hover:bg-gray-700 
+             transition-all duration-300 ease-in-out"
               >
                 <td className="flex gap-4 justify-start items-center">
                   <Checkbox {...label} checked={el.hasDiscount} />
@@ -119,13 +121,14 @@ const Products = () => {
 
                 <td>
                   <NavLink to={`/editproducts/${el.id}`}>
-                    <Button>
+                    <Button className="hover:bg-blue-100">
                       <BorderColorOutlinedIcon />
                     </Button>
                   </NavLink>
                   <Button
                     onClick={() => dispatch(DeleteProducts(el.id))}
                     sx={{ color: "red" }}
+                    className="hover:bg-red-100"
                   >
                     <DeleteOutlineOutlinedIcon />
                   </Button>

@@ -65,19 +65,15 @@ const Order = () => {
           </tr>
         </thead>
         <tbody className="w-full pb-12">
-          { 
-            
-           (
-              paginatedUsers.map((el) =>
-               
-              {
-                if (loading) {
-                  return <LoaderDash />
-                }
-                return (
-                 <tr
+          {paginatedUsers.map((el) => {
+            if (loading) {
+              return <LoaderDash />;
+            }
+            return (
+              <tr
                 key={el.id}
-                className="p-2 text-center h-[70px] rounded-lg w-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+                className={`p-2 text-center h-[70px] rounded-lg w-full transition-all 
+    hover:bg-gray-100 dark:hover:bg-gray-700`}
               >
                 <td className="flex gap-4 items-center px-4">
                   <img
@@ -94,67 +90,57 @@ const Order = () => {
                   </h2>
                 </td>
 
-                <td className="px-4">
-                  <h1 className="text-gray-700  dark:text-gray-300">
-                    {el.dob}
-                  </h1>
+                <td
+                  className={`px-4 transition-colors ${
+                    el.userRoles[0]?.name === "Admin"
+                      ? "hover:text-red-500 dark:hover:text-red-400"
+                      : "hover:text-blue-500 dark:hover:text-blue-400"
+                  }`}
+                >
+                  <h1 className="text-gray-700 dark:text-gray-300">{el.dob}</h1>
                 </td>
-                <td className="flex justify-center mt-[-20px]  items-center ">
-                  {el.userRoles.slice(0, 1).map((elem) => {
-                    return (
-                      <Button
-                        onClick={() =>
-                          dispatch(
-                            DeleteUserRole({
-                              UserId: el.userId,
-                              RoleId: elem.id,
-                            })
-                          )
-                        }
-                        variant="outlined"
-                        color={elem.name === "Admin" ? "error" : "primary"} // style вобаста ба role
-                        sx={{
-                          color:
-                            elem.name === "Admin" ? "green" : "blue",
-                          backgroundColor:"white",
-                          
-                        }}
-                      >
-                        delete role {elem.name}
-                      </Button>
-                    );
-                  })}
+
+                <td className="flex justify-center mt-[-20px] items-center">
+                  {el.userRoles.slice(0, 1).map((elem) => (
+                    <Button
+                      onClick={() =>
+                        dispatch(
+                          DeleteUserRole({
+                            UserId: el.userId,
+                            RoleId: elem.id,
+                          })
+                        )
+                      }
+                      variant="outlined"
+                      color={elem.name === "Admin" ? "error" : "primary"}
+                      sx={{
+                        color: elem.name === "Admin" ? "green" : "blue",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      delete role {elem.name}
+                    </Button>
+                  ))}
                 </td>
+
                 <td className="px-4">
                   <select
                     onChange={(e) => {
                       const newRoleId = e.target.value;
                       const userId = el.userId;
 
-                      // Агар user role дорад, delete мекунем
                       if (el.userRoles.length > 0) {
-                        const oldRoleId = el.userRoles[0].id; // ё кадоме ки лозим
+                        const oldRoleId = el.userRoles[0].id;
                         dispatch(
-                          DeleteUserRole({
-                            UserId: userId,
-                            RoleId: oldRoleId,
-                          })
+                          DeleteUserRole({ UserId: userId, RoleId: oldRoleId })
                         ).then(() => {
-                          // Пас аз delete → role-и навро add мекунем
                           dispatch(
-                            AddUserRole({
-                              UserId: userId,
-                              RoleId: newRoleId,
-                            })
+                            AddUserRole({ UserId: userId, RoleId: newRoleId })
                           );
                         });
                       } else {
-                        // Агар role надорад → role-и навро мустақим add мекунем
                         dispatch(
-                          AddUserRole({
-                            UserId: userId,
-                            RoleId: newRoleId,
-                          })
+                          AddUserRole({ UserId: userId, RoleId: newRoleId })
                         );
                       }
                     }}
@@ -188,10 +174,8 @@ const Order = () => {
                   </Button>
                 </td>
               </tr>
-               )
-              }
-            )
-          )}
+            );
+          })}
         </tbody>
 
         {/* Pagination */}
