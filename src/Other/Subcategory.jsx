@@ -176,10 +176,10 @@ const Subcategory = () => {
           <form action="" onSubmit={handleAddBrands}>
             <TextField
               sx={{
-                input: { color: "black", "&:focus": { color: "white" } },
-                label: { color: "black", "&.Mui-focused": { color: "white" } },
+                input: { color: "black",  },
+                label: { color: "black",  },
               }}
-              className="!text-black !dark:text-white"
+              className="!dark:text-white  !text-black"
               fullWidth
               variant="outlined"
               type="text"

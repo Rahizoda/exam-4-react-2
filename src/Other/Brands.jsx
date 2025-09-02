@@ -129,11 +129,7 @@ const Brands = () => {
           <h2 className="text-2xl">Add new brand</h2> <br />
           <form action="" onSubmit={handleAddBrands}>
             <TextField
-              sx={{
-                input: { color: "black", "&:focus": { color: "white" } },
-                label: { color: "black", "&.Mui-focused": { color: "white" } },
-              }}
-              className="!text-black !dark:text-white"
+             
               fullWidth
               variant="outlined"
               type="text"

@@ -1,7 +1,12 @@
 import { Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AddCategory, DeleteCategory, EditCategory, GetCategory } from "../config/dataSlice";
+import {
+  AddCategory,
+  DeleteCategory,
+  EditCategory,
+  GetCategory,
+} from "../config/dataSlice";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Modal } from "antd";
@@ -49,16 +54,16 @@ const Categories = () => {
     formData.append("CategoryName", e.target["cate"].value);
     dispatch(AddCategory(formData));
     handleCancel();
-    e.target.reset()
+    e.target.reset();
   }
-  
-  const[edit , setEdit] = useState({})
+
+  const [edit, setEdit] = useState({});
   function handleSubmitEditCategory(e) {
     e.preventDefault();
     let formData = new FormData();
     formData.append("CategoryImage", e.target["img"].files[0]);
     formData.append("CategoryName", e.target["cate"].value);
-    formData.append('Id', edit.id)
+    formData.append("Id", edit.id);
     dispatch(EditCategory(formData));
     handleCancelEdit();
   }
@@ -114,9 +119,11 @@ const Categories = () => {
             return <LoaderDash />;
           }
           return (
-            <div className="w-[182px] h-[144px] border border-gray-400 rounded-[10px]  
+            <div
+              className="w-[182px] h-[144px] border border-gray-400 rounded-[10px]  
   p-[20px] flex items-start justify-between
-  transition-transform duration-500 hover:scale-105 hover:shadow-lg">
+  transition-transform duration-500 hover:scale-105 hover:shadow-lg"
+            >
               <div>
                 <img
                   className="w-[56px] h-[56px] "
@@ -126,10 +133,12 @@ const Categories = () => {
                 <h2 className="text-[16px]">{el.categoryName}</h2>
               </div>
               <div>
-                <Button onClick={() => {
-                  setEdit(el)
-                  showModalEdit()
-                }}>
+                <Button
+                  onClick={() => {
+                    setEdit(el);
+                    showModalEdit();
+                  }}
+                >
                   <BorderColorOutlinedIcon />{" "}
                 </Button>{" "}
                 <br />
@@ -156,7 +165,7 @@ const Categories = () => {
                     />{" "}
                     <br />
                     <br />
-                    <TextField   fullWidth type="file" name="img" /> <br />
+                    <TextField fullWidth type="file" name="img" /> <br />
                     <br />
                     <Button type="submit" variant="contained">
                       submit
