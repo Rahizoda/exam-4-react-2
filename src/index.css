@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+header{
+  background:linear-gradient(45deg, #000000 20%,#2563EB 100%);
+  background-size: cover;
+  background-repeat:no-repeat ;
+  background-attachment: fixed; 
+}
+aside{
+ 
+  background:linear-gradient(45deg, #000000 20%,#2563EB 100%);
+  background-size: cover;
+  background-repeat:no-repeat ;
+  background-attachment: fixed;
+
+}
