@@ -90,7 +90,8 @@ const Products = () => {
               </td>
             </tr>
           ) : (
-            products.map((el) => (
+            products.filter((e)=>e.productName.toLowerCase().includes(search.trim().toLocaleLowerCase()))
+            .map((el) => (
               <tr
                 key={el.id}
                 className="p-2 text-center h-[70px] rounded-[5px] w-[100%] 
