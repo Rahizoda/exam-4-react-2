@@ -67,18 +67,18 @@ export default function EditProducts() {
     e.preventDefault();
     let formData = new FormData();
     formData.append("Id", id);
-    formData.append("ProductName", e.target["productsName"].value);
-    formData.append("BrandId", brand);
-    formData.append("ColorId", idColor);
-    formData.append("Description", e.target["desc"].value);
+    formData.append("ProductName", e.target["productsName"].value||'productEror');
+    formData.append("BrandId", brand||401);
+    formData.append("ColorId", idColor||132);
+    formData.append("Description", e.target["desc"].value||"descerro");
     formData.append("Quantity", e.target["quantity"].value);
-    formData.append("Code", e.target["code"].value);
-    formData.append("HasDiscount", stx);
-    formData.append("Price", e.target["price"].value);
-    formData.append("DiscountPrice", e.target["discountPrice"].value);
-    formData.append("SubCategoryId", sub);
-    formData.append("Width", width);
-    formData.append("Size", size);
+    formData.append("Code", e.target["code"].value+Date.now());
+    formData.append("HasDiscount", stx||false);
+    formData.append("Price", e.target["price"].value||1);
+    formData.append("DiscountPrice", e.target["discountPrice"].value||2);
+    formData.append("SubCategoryId", sub||893);
+    formData.append("Width", width||'10');
+    formData.append("Size", size||"xs");
     dispatch(EditProductsFunc(formData));
     openMessage()
     // window.localStorage = '/products'

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { API } from './configAxios'
+import { useNavigate } from 'react-router-dom'
 
 export const GetProducts = createAsyncThunk("todos/GetProducts", async () => {
     try {
@@ -13,7 +14,10 @@ export const GetProducts = createAsyncThunk("todos/GetProducts", async () => {
 export const AddProductsFunc = createAsyncThunk("todos/AddProductsFunc", async (product, { dispatch }) => {
     try {
         await API.post('Product/add-product', product)
+        // const navigate = useNavigate()   
         dispatch(GetProducts())
+        //   navigate('/products')
+
     } catch (error) {
         console.log(error);
     }

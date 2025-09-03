@@ -60,24 +60,23 @@ export default function AddProducts() {
   function handleSubmitAddProducts(e) {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("Images", e.target["img"].files[0]);
-    formData.append("ProductName", e.target["productsName"].value);
-    formData.append("BrandId", brand);
-    formData.append("ColorId", idColor);
-    formData.append("Description", e.target["desc"].value);
+    formData.append("Images", e.target["img"].files[0]||new Blob());
+    formData.append("ProductName", e.target["productsName"].value||'productEror');
+    formData.append("BrandId", brand||401);
+    formData.append("ColorId", idColor||132);
+    formData.append("Description", e.target["desc"].value||"descerro");
     formData.append("Quantity", e.target["quantity"].value);
-    formData.append("Code", e.target["code"].value);
-    formData.append("HasDiscount", stx);
-    formData.append("Price", e.target["price"].value);
-    formData.append("DiscountPrice", e.target["discountPrice"].value);
-    formData.append("SubCategoryId", sub);
-    formData.append("Width", width);
-    formData.append("Size", size);
+    formData.append("Code", e.target["code"].value+Date.now());
+    formData.append("HasDiscount", stx||false);
+    formData.append("Price", e.target["price"].value||1);
+    formData.append("DiscountPrice", e.target["discountPrice"].value||2);
+    formData.append("SubCategoryId", sub||893);
+    formData.append("Width", width||'10');
+    formData.append("Size", size||"xs");
 
     dispatch(AddProductsFunc(formData));
     e.target.reset();
     openMessage();
-    // window.location = "/products";
   }
 
   const [isModalOpen, setIsModalOpen] = useState(false);

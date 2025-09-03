@@ -71,7 +71,8 @@ const Brands = () => {
               return (
                 <tr className="border-b border-b-gray-400 h-[56px] p-[10px] rounded-2xl ">
                   <td>
-                    <h1 className="text-start font-bold">{el.brandName}</h1>
+                    <h1 className="text-start font-bold">{el.brandName}:{el.id}</h1>
+                    
                   </td>
                   <td>
                     <Button onClick={()=>{
