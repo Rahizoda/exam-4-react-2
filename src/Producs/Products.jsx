@@ -9,6 +9,9 @@ import { FiSearch } from "react-icons/fi";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import EmptyProducts from "./Products404";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+
 
 const Products = () => {
   const { data, loading } = useSelector((state) => state.data);
@@ -90,52 +93,59 @@ const Products = () => {
               </td>
             </tr>
           ) : (
-            products.filter((e)=>e.productName.toLowerCase().includes(search.trim().toLocaleLowerCase()))
-            .map((el) => (
-              <tr
-                key={el.id}
-                className="p-2 text-center h-[70px] rounded-[5px] w-[100%] 
+            products
+              .filter((e) =>
+                e.productName
+                  .toLowerCase()
+                  .includes(search.trim().toLocaleLowerCase())
+              )
+              .map((el) => (
+                <tr
+                  key={el.id}
+                  className="p-2 text-center h-[70px] rounded-[5px] w-[100%] 
              hover:bg-gray-100 dark:hover:bg-gray-700 
              transition-all duration-300 ease-in-out"
-              >
-                <td className="flex gap-4 justify-start items-center">
-                  <Checkbox {...label} checked={el.hasDiscount} />
-                  <img
-                    className="w-[52px] h-[54px] rounded-xl"
-                    src={`http://37.27.29.18:8002/images/${el.image}`}
-                    alt="not found"
-                  />
-                  <h2 className="dark:text-gray-300 font-semibold text-gray-800 truncate">
-                    {el.productName}
-                  </h2>
-                </td>
+                >
+                  <td className="flex gap-4 justify-start items-center">
+                    <Checkbox {...label} checked={el.hasDiscount} />
+                    <img
+                      loading="lazy"
+                      className="w-[52px] h-[54px] rounded-xl"
+                      src={`http://37.27.29.18:8002/images/${el.image}`}
+                      alt="not found"
+                    />
+                   
+                    <h2 className="dark:text-gray-300 font-semibold text-gray-800 truncate">
+                      {el.productName}
+                    </h2>
+                  </td>
 
-                <td>
-                  <h1>$ {el.price}</h1>
-                </td>
+                  <td>
+                    <h1>$ {el.price}</h1>
+                  </td>
 
-                <td>{el.categoryName}</td>
+                  <td>{el.categoryName}</td>
 
-                <td>
-                  <h2>{el.quantity}</h2>
-                </td>
+                  <td>
+                    <h2>{el.quantity}</h2>
+                  </td>
 
-                <td>
-                  <NavLink to={`/editproducts/${el.id}`}>
-                    <Button className="hover:bg-blue-100">
-                      <BorderColorOutlinedIcon />
+                  <td>
+                    <NavLink to={`/editproducts/${el.id}`}>
+                      <Button onClick={()=>localStorage.setItem('productId',el.id)} className="hover:bg-blue-100">
+                        <BorderColorOutlinedIcon />
+                      </Button>
+                    </NavLink>
+                    <Button
+                      onClick={() => dispatch(DeleteProducts(el.id))}
+                      sx={{ color: "red" }}
+                      className="hover:bg-red-100"
+                    >
+                      <DeleteOutlineOutlinedIcon />
                     </Button>
-                  </NavLink>
-                  <Button
-                    onClick={() => dispatch(DeleteProducts(el.id))}
-                    sx={{ color: "red" }}
-                    className="hover:bg-red-100"
-                  >
-                    <DeleteOutlineOutlinedIcon />
-                  </Button>
-                </td>
-              </tr>
-            ))
+                  </td>
+                </tr>
+              ))
           )}
         </tbody>
       </table>

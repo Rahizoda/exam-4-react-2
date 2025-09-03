@@ -79,6 +79,8 @@ export default function AddProducts() {
     openMessage();
   }
 
+ 
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -325,6 +327,7 @@ export default function AddProducts() {
             <input
               name="img"
               type="file"
+               multiple 
               className="border-2 w-[275px] rounded-lg p-4 text-center text-gray-500"
             />
             <div className="mt-4 space-y-2">

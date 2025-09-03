@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { API } from './configAxios'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 export const GetProducts = createAsyncThunk("todos/GetProducts", async () => {
     try {
@@ -26,7 +26,23 @@ export const AddProductsFunc = createAsyncThunk("todos/AddProductsFunc", async (
 export const EditProductsFunc = createAsyncThunk('todos/EditProductsFunc', async (product, { dispatch }) => {
     try {
         await API.put(`Product/update-product`, product)
-        dispatch(GetProducts())
+        dispatch(GetByIdProducts(localStorage.getItem('productId')))
+    } catch (error) {
+        console.log(error);
+    }
+})
+export const AddImgProductsFunc = createAsyncThunk('todos/AddImgProductsFunc', async (product, { dispatch }) => {
+    try {
+        await API.post(`Product/add-image-to-product`, product)
+        dispatch(GetByIdProducts(localStorage.getItem('productId')))
+    } catch (error) {
+        console.log(error);
+    }
+})
+export const DelImgProductsFunc = createAsyncThunk('todos/DelImgProductsFunc', async (product, { dispatch }) => {
+    try {
+        await API.delete(`Product/delete-image-from-product?imageId=${product}`)
+        dispatch(GetByIdProducts(localStorage.getItem('productId')))
     } catch (error) {
         console.log(error);
     }
