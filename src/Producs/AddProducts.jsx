@@ -100,6 +100,8 @@ export default function AddProducts() {
     handleCancel()
   }
 
+  
+
   return (
     <form
       onSubmit={handleSubmitAddProducts}

@@ -15,3 +15,35 @@ aside{
   background-attachment: fixed;
 
 }
+
+.ant-pagination .ant-pagination-item {
+  border-radius: 8px; /* кунҷҳоро каме гирд кун */
+  border: 1px solid #e5e7eb; /* ранги border */
+  background: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-pagination .ant-pagination-item a {
+  color: black;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border: 1px solid #2563eb; /* ранги border active */
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: #2563eb;
+  font-weight: 400;
+}
+
+.ant-pagination .ant-pagination-prev,
+.ant-pagination .ant-pagination-next {
+  border: none;
+  background: white;
+  color: black;
+}

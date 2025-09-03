@@ -27,17 +27,6 @@ const Layout = () => {
     console.error("Invalid token:", error);
   } 
 
-  if (!decoded) {
-    return (
-      <div className="pt-[130px] w-[100%] transition-all duration-700 ease-in-out dark:bg-[#1C2536] bg-[white] dark:text-white text-black h-[100vh]  pl-[70px]">
-        <NavLink to='/login'>
-          <h2 className="text-red-500 mt-5 text-2xl dark:text-white">⚠️ Лутфан аввал логин шавед</h2>
-        </NavLink>
-      </div>
-    );
-  }
-
-
 
   return (
     <div className="flex">
@@ -93,6 +82,7 @@ const Layout = () => {
                 <button onClick={() => {
                   localStorage.removeItem("accessToken")
                   setOpen(!open)
+                  window.location = '/login'
                 }}>
                   
                  <ButtonLogout  />

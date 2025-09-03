@@ -10,6 +10,7 @@ import {
 import { Button } from "@mui/material";
 import LoaderDash from "../config/Loader";
 import { message, Pagination } from "antd";
+import Aos from "aos";
 
 const Order = () => {
   const { user, loading, role } = useSelector((state) => state.data);
@@ -20,6 +21,12 @@ const Order = () => {
     dispatch(GetProfileUser());
     dispatch(GetRole());
   }, [dispatch]);
+   useEffect(() => {
+    Aos.init({
+      duration: 1000, // давомнокии анимация (1с)
+      once: true,     // як бор иҷро шавад
+    });
+  }, []);
 
   const [messageApi, contextHolder] = message.useMessage();
   const key = "updatable";
@@ -71,11 +78,12 @@ const Order = () => {
             }
             return (
               <tr
+                
                 key={el.id}
-                className={`p-2 text-center h-[70px] rounded-lg w-full transition-all 
-    hover:bg-gray-100 dark:hover:bg-gray-700`}
+                className={`p-[20px] text-center h-[70px] rounded-lg w-full transition-all duration-300`}
               >
-                <td className="flex gap-4 items-center px-4">
+                {/* User info */}
+                <td className="flex gap-4 w-full h-full items-center px-4">
                   <img
                     className="w-14 h-14 rounded-xl object-cover"
                     src={
@@ -90,17 +98,19 @@ const Order = () => {
                   </h2>
                 </td>
 
+                {/* DOB */}
                 <td
-                  className={`px-4 transition-colors ${
+                  className={`px-4 transition-colors font-semibold duration-300 ${
                     el.userRoles[0]?.name === "Admin"
-                      ? "hover:text-red-500 dark:hover:text-red-400"
-                      : "hover:text-blue-500 dark:hover:text-blue-400"
+                      ? "hover:text-red-600 dark:hover:text-red-400"
+                      : "hover:text-blue-600 dark:hover:text-blue-400"
                   }`}
                 >
-                  <h1 className="text-gray-700 dark:text-gray-300">{el.dob}</h1>
+                  {el.dob}
                 </td>
 
-                <td className="flex justify-center mt-[-20px] items-center">
+                {/* Roles */}
+                <td className="">
                   {el.userRoles.slice(0, 1).map((elem) => (
                     <Button
                       onClick={() =>
@@ -116,6 +126,7 @@ const Order = () => {
                       sx={{
                         color: elem.name === "Admin" ? "green" : "blue",
                         backgroundColor: "white",
+                        fontSize: "12px",
                       }}
                     >
                       delete role {elem.name}
@@ -123,6 +134,7 @@ const Order = () => {
                   ))}
                 </td>
 
+                {/* Role select */}
                 <td className="px-4">
                   <select
                     onChange={(e) => {
@@ -155,6 +167,7 @@ const Order = () => {
                   </select>
                 </td>
 
+                {/* Delete button */}
                 <td className="px-4">
                   {contextHolder}
                   <Button
@@ -179,8 +192,9 @@ const Order = () => {
         </tbody>
 
         {/* Pagination */}
-        <div className="mt-[50px]  flex justify-center">
-          <Pagination
+        <div className="mt-[50px] dark:bg-[linear-gradient(45deg,#000000_20%,#2563EB_100%)] dark:bg-cover dark:bg-no-repeat dark:bg-fixed flex justify-center">
+          <Pagination 
+            
             current={currentPage}
             pageSize={pageSize}
             total={allUsers.length}
