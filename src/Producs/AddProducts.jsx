@@ -289,7 +289,7 @@ export default function AddProducts() {
                <TextField value={color} onChange={(e)=>setColor(e.target.value)} name="color" fullWidth variant="outlined" label='Color name' type="text" /> <br /><br />
                <div className="flex items-center gap-3">
                     <TextField sx={{ width: "100px" }} onChange={(e) => {
-
+                      
                       setColor(e.target.value)
                     }} type="color" /> 
                <Button onClick={handleSubmitColor} variant="contained" sx={{height:"50px"}}>submit</Button>

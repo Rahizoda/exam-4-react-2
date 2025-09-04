@@ -102,7 +102,7 @@ const Subcategory = () => {
               className="border-b border-b-gray-400 flex justify-between items-center min-h-[56px] p-[10px]"
             >
               <td>
-                <h1 className="text-start font-bold">{el.subCategoryName}:{el.id }</h1>
+                <h1 className="text-start font-bold">{el.subCategoryName}</h1>
               </td>
               <td className="flex">
                 <Button

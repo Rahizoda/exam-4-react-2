@@ -96,7 +96,7 @@ export default function EditProducts() {
       "ProductName",
       e.target["productsName"].value || "productEror"
     );
-    formData.append("BrandId", brand || 401);
+    formData.append("BrandId", brand || 423);
     formData.append("ColorId", idColor || 132);
     formData.append("Description", e.target["desc"].value || "descerro");
     formData.append("Quantity", e.target["quantity"].value);
@@ -104,7 +104,7 @@ export default function EditProducts() {
     formData.append("HasDiscount", stx || false);
     formData.append("Price", e.target["price"].value || 1);
     formData.append("DiscountPrice", e.target["discountPrice"].value || 2);
-    formData.append("SubCategoryId", sub || 893);
+    formData.append("SubCategoryId", sub || 900);
     formData.append("Width", width || "10");
     formData.append("Size", size || "xs");
     dispatch(EditProductsFunc(formData));
