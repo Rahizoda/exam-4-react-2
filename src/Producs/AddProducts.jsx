@@ -57,7 +57,7 @@ export default function AddProducts() {
     dispatch(GetBrands())
   }, [dispatch]);
 
-  function handleSubmitAddProducts(e) {
+ async  function handleSubmitAddProducts(e) {
     e.preventDefault();
     let formData = new FormData();
     formData.append("Images", e.target["img"].files[0]||new Blob());
@@ -74,9 +74,14 @@ export default function AddProducts() {
     formData.append("Width", width||'10');
     formData.append("Size", size||"xs");
 
-    dispatch(AddProductsFunc(formData));
+    try {
+    await dispatch(AddProductsFunc(formData)); // интизор мешавем
     e.target.reset();
     openMessage();
+    window.location = "/products";
+  } catch (err) {
+    console.error("Ошибка при добавлении продукта:", err);
+  };
   }
 
  

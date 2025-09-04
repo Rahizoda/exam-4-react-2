@@ -26,7 +26,7 @@ export const AddProductsFunc = createAsyncThunk("todos/AddProductsFunc", async (
 export const EditProductsFunc = createAsyncThunk('todos/EditProductsFunc', async (product, { dispatch }) => {
     try {
         await API.put(`Product/update-product`, product)
-        dispatch(GetByIdProducts(localStorage.getItem('productId')))
+        dispatch(GetProducts())
     } catch (error) {
         console.log(error);
     }

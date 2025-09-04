@@ -88,7 +88,7 @@ export default function EditProducts() {
     }, 1000);
   };
 
-  function handleSubmitAddProducts(e) {
+async  function handleSubmitAddProducts(e) {
     e.preventDefault();
     let formData = new FormData();
     formData.append("Id", idOrig);
@@ -107,18 +107,31 @@ export default function EditProducts() {
     formData.append("SubCategoryId", sub || 900);
     formData.append("Width", width || "10");
     formData.append("Size", size || "xs");
-    dispatch(EditProductsFunc(formData));
-    openMessage();
-    // window.localStorage = '/products'
+    try {
+        await dispatch(EditProductsFunc(formData)); // интизор мешавем
+        e.target.reset();
+        openMessage();
+        window.location = "/products";
+      } catch (err) {
+        console.error("Ошибка при добавлении продукта:", err);
+      };
   }
-  const [img, setImg] = useState();
+  const [images, setImages] = useState();
   function handleAddImg() {
     const formd = new FormData();
     formd.append("ProductId", id);
-    formd.append("Files", img);
+    formd.append("Files", images);
     dispatch(AddImgProductsFunc(formd));
     openMessage();
   }
+
+
+  // const handleChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   setImages(files);
+  // };
+
+ 
 
 
   return (
@@ -329,7 +342,9 @@ export default function EditProducts() {
               </div>
               <input
                 name="addimg"
-                onChange={(e) => setImg(e.target.files[0] || new Blob())}
+                 multiple
+                onChange={(e)=>setImages(e.target.files[0])}
+                // onChange={(e) => setImages(e.target.files[0] || new Blob())}
                 type="file"
                 className="border-2 w-[275px] rounded-lg p-4 text-center text-gray-500"
               />
@@ -337,7 +352,7 @@ export default function EditProducts() {
             <div className="mt-4 w-full   space-y-2">
               <Swiper
                 spaceBetween={30}
-        centeredSlides={true}
+           centeredSlides={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
