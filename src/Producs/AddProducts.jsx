@@ -75,7 +75,7 @@ export default function AddProducts() {
     formData.append("Size", size||"xs");
 
     try {
-    await dispatch(AddProductsFunc(formData)); // интизор мешавем
+    await dispatch(AddProductsFunc(formData))
     e.target.reset();
     openMessage();
     window.location = "/products";

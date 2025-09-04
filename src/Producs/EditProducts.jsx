@@ -108,7 +108,7 @@ async  function handleSubmitAddProducts(e) {
     formData.append("Width", width || "10");
     formData.append("Size", size || "xs");
     try {
-        await dispatch(EditProductsFunc(formData)); // интизор мешавем
+        await dispatch(EditProductsFunc(formData))
         e.target.reset();
         openMessage();
         window.location = "/products";
@@ -116,6 +116,7 @@ async  function handleSubmitAddProducts(e) {
         console.error("Ошибка при добавлении продукта:", err);
       };
   }
+
   const [images, setImages] = useState();
   function handleAddImg() {
     const formd = new FormData();
@@ -344,7 +345,6 @@ async  function handleSubmitAddProducts(e) {
                 name="addimg"
                  multiple
                 onChange={(e)=>setImages(e.target.files[0])}
-                // onChange={(e) => setImages(e.target.files[0] || new Blob())}
                 type="file"
                 className="border-2 w-[275px] rounded-lg p-4 text-center text-gray-500"
               />
@@ -372,10 +372,7 @@ async  function handleSubmitAddProducts(e) {
                       className="flex justify-between w-[300px] items-center border rounded-lg px-3 py-2"
                     >
                       <img src={`http://37.27.29.18:8002/images/${img.images}`} alt="" />
-                     <button onClick={() => {
-                      dispatch(DelImgProductsFunc(img.id))
-                       dispatch(GetByIdProducts(idOrig))
-                     }} className="p-2 hover:bg-gray-100 rounded-lg">
+                     <button onClick={() => dispatch(DelImgProductsFunc(img.id))} className="p-2 hover:bg-gray-100 rounded-lg">
                         <FiTrash2 className="text-red-600" />
                       </button>
                     </div>
