@@ -12,7 +12,7 @@ import {
   GetProducts,
   GetSubCategory,
 } from "../config/dataSlice";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { message } from "antd";
 import { Button } from "@mui/material";
 // Import Swiper styles
@@ -111,7 +111,7 @@ async  function handleSubmitAddProducts(e) {
         await dispatch(EditProductsFunc(formData))
         e.target.reset();
         openMessage();
-        window.location = "/products";
+        window.location = '/products'
       } catch (err) {
         console.error("Ошибка при добавлении продукта:", err);
       };
@@ -126,13 +126,11 @@ async  function handleSubmitAddProducts(e) {
     openMessage();
   }
 
+  function handleDelImg(id) {
+    dispatch(DelImgProductsFunc(id))
+    openMessage()
+  }
 
-  // const handleChange = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   setImages(files);
-  // };
-
- 
 
 
   return (
@@ -372,7 +370,11 @@ async  function handleSubmitAddProducts(e) {
                       className="flex justify-between w-[300px] items-center border rounded-lg px-3 py-2"
                     >
                       <img src={`http://37.27.29.18:8002/images/${img.images}`} alt="" />
-                     <button onClick={() => dispatch(DelImgProductsFunc(img.id))} className="p-2 hover:bg-gray-100 rounded-lg">
+                     <button onClick={() => {
+                       handleDelImg(img.id)
+                       console.log(img.id);
+                       
+                     }} className="p-2 hover:bg-gray-100 rounded-lg">
                         <FiTrash2 className="text-red-600" />
                       </button>
                     </div>

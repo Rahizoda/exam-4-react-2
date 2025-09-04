@@ -39,9 +39,9 @@ export const AddImgProductsFunc = createAsyncThunk('todos/AddImgProductsFunc', a
         console.log(error);
     }
 })
-export const DelImgProductsFunc = createAsyncThunk('todos/DelImgProductsFunc', async (product, { dispatch }) => {
+export const DelImgProductsFunc = createAsyncThunk('todos/DelImgProductsFunc', async (id, { dispatch }) => {
     try {
-        await API.delete(`Product/delete-image-from-product?imageId=${product}`)
+        await API.delete(`Product/delete-image-from-product?imageId=${id}`)
         dispatch(GetByIdProducts(localStorage.getItem('productId')))
     } catch (error) {
         console.log(error);
